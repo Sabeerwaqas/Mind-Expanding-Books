@@ -27,7 +27,7 @@ const BookCard = ({ book }) => {
   const bookJsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    itemListElement: books.map((book, index) => ({
+    itemListElement: book.map((book, index) => ({
       "@type": "ListItem",
       position: index + 1,
       item: {
