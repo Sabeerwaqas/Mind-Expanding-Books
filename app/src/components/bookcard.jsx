@@ -3,9 +3,9 @@ import React, { useState } from "react"
 import StarRatings from "react-star-ratings"
 import { Card, Row, Col } from "react-bootstrap"
 
-import AmazonURL from "../components/amazonurl"
-import Bookmark from "../components/bookmark"
-import GoodReadsImage from "../components/goodreadsimage"
+import AmazonURL from "./amazonurl"
+import Bookmark from "./bookmark"
+import GoodReadsImage from "./goodreadsimage"
 
 const truncateContent = content => {
   if (!content) {
@@ -26,40 +26,33 @@ const BookCard = ({ book }) => {
 
   const bookJsonLd = {
     "@context": "https://schema.org",
-    "@type": "ItemList",
-    itemListElement: book.map((book, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      item: {
-        "@type": "Book",
-        name: book.title,
-        author: {
-          "@type": "Person",
-          name: book.author,
-        },
-        datePublished: book.year ? String(book.year) : undefined,
-        image: book.image_url,
-        description: book.description,
-        aggregateRating: book.rating
-          ? {
-              "@type": "AggregateRating",
-              ratingValue: String(book.rating),
-              bestRating: "5",
-              worstRating: "1",
-              ratingCount: book.ratingCount ? Number(book.ratingCount) : 1,
-              reviewCount: book.reviewCount ? Number(book.reviewCount) : 1,
-            }
-          : undefined,
-        sameAs: book.url,
-        offers: book.amazon_url
-          ? {
-              "@type": "Offer",
-              url: book.amazon_url,
-              availability: "https://schema.org/InStock",
-            }
-          : undefined,
-      },
-    })),
+    "@type": "Book",
+    name: book.title,
+    author: {
+      "@type": "Person",
+      name: book.author,
+    },
+    datePublished: book.year ? String(book.year) : undefined,
+    image: book.image_url,
+    description: book.description,
+    aggregateRating: book.rating
+      ? {
+          "@type": "AggregateRating",
+          ratingValue: String(book.rating),
+          bestRating: "5",
+          worstRating: "1",
+          ratingCount: book.ratingCount ? Number(book.ratingCount) : 1,
+          reviewCount: book.reviewCount ? Number(book.reviewCount) : 1,
+        }
+      : undefined,
+    sameAs: book.url,
+    offers: book.amazon_url
+      ? {
+          "@type": "Offer",
+          url: book.amazon_url,
+          availability: "https://schema.org/InStock",
+        }
+      : undefined,
   }
 
   return (
