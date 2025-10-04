@@ -38,7 +38,7 @@ const BookCard = ({ book }) => {
     aggregateRating: book.rating
       ? {
           "@type": "AggregateRating",
-          ratingValue: String(book.rating),
+          ratingCount: String(book.rating),
           bestRating: "5",
           worstRating: "1",
         }
